@@ -4,7 +4,7 @@
 n=0
 primes = [3]
 for i in range(5, 2000000, 2):
-    if int(primes[n]) ** 2 == i:
+    if primes[n] ** 2 == i:
         n += 1
         continue
     for k in primes[:n+1]:#divider

@@ -5,13 +5,19 @@
 
 #Найдите сумму всех четных элементов ряда Фибоначчи,
 #которые не превышают четыре миллиона.
-i = 2
-sum_all = 2
-x0 = 1
-x = 1
-while i <= 4000000:
-    i +=  x
-    if i % 2 == 0:
-        sum_all += i
-    x0,x = x, x0 + x
-print(sum_all)
+def fib():
+    a, b = 0, 1
+    while True:
+        yield b
+        a, b = b, a + b
+
+func = fib()
+x = next(func)
+ans = 0
+
+while x < 4000000:
+    if x % 2 == 0:
+        ans += x
+    x = next(func)
+
+print(ans)
