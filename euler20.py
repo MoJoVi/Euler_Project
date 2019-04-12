@@ -10,6 +10,7 @@ answer = 0
 while n:
     fac *= n
     n -= 1
+    
 *fac, = str(fac)
 
 for i in fac:
