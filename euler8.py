@@ -3,7 +3,10 @@
 # произведение тринадцати последовательных цифр в данном числе.
 from functools import reduce
 
-s = open('euler8.txt').read().replace('\n', '')
+
+with open('euler8.txt'):
+    s = open('euler8.txt').read().replace('\n', '')
+
 numlist = []
 answer = 0
 
