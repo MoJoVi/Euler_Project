@@ -46,4 +46,3 @@ for i in abund[:len(abund) // 2]:
 
 print(sum(answer))
 print("--- %s seconds ---" % (time.time() - start))
-# 4179871
