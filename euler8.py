@@ -12,10 +12,8 @@ answer = 0
 
 for i in s:
     numlist.append(int(i))
-
     if len(numlist) == 13:
         summ = reduce(lambda x, y: x * y, numlist)
-
         if summ > answer:
             answer = summ
         numlist.pop(0)

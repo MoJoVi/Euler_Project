@@ -29,8 +29,6 @@ for num in limit:
     if sum(nums) > num:
         abund.append(num)
 
-print("--- %s seconds ---" % (time.time() - start))
-
 answer = list(range(28124))
 l = set()
 for i in abund[:len(abund) // 2]:

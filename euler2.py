@@ -14,13 +14,14 @@ def fib():
         a, b = b, a + b
 
 
-func = fib()
-x = next(func)
-ans = 0
-
-while x < 4000000:
-    if x % 2 == 0:
-        ans += x
+if __name__ == '__main__':
+    func = fib()
     x = next(func)
+    ans = 0
 
-print(ans)
+    while x < 4000000:
+        if x % 2 == 0:
+            ans += x
+        x = next(func)
+
+    print(ans)
