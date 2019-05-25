@@ -38,9 +38,9 @@ for i in abund[:len(abund) // 2]:
             continue
         elif num > 28123:
             break
-
         l.add(num)
-        answer.remove(num)
+
+answer = [num for num in answer if num not in l]
 
 print(sum(answer))
 print("--- %s seconds ---" % (time.time() - start))
