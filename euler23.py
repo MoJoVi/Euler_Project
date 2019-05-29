@@ -29,7 +29,6 @@ for num in limit:
     if sum(nums) > num:
         abund.append(num)
 
-answer = list(range(28124))
 l = set()
 for i in abund[:len(abund) // 2]:
     for k in abund:
@@ -39,7 +38,8 @@ for i in abund[:len(abund) // 2]:
         elif num > 28123:
             break
         l.add(num)
-
+        
+answer = list(range(28124))
 answer = [num for num in answer if num not in l]
 
 print(sum(answer))
