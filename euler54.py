@@ -32,11 +32,6 @@
 Примечание: карты в текстовом файле обозначены в соответствии с английскими
 наименованиями достоинств и мастей: T - десятка, J - валет, Q - дама,
 K - король, A - туз; S - пики, C - трефы, H - червы, D - бубны."""
-cards = {}
-with open('poker.txt') as poker:
-    for i in range(1000):
-        part = poker.readline()
-        cards[i] = part.replace('\n', '').split(' ')
 
 
 def how_cart(cardlist):
@@ -86,6 +81,8 @@ def how_comb(hand):
                hand[0][2], hand[0][1], hand[0][0]
     elif straight(hand[0]):  # Straight
         return 5, hand[0][-1]
+    elif len(set(hand[0])) == 5:
+        return 1, hand[0][4], hand[0][3], hand[0][2], hand[0][1], hand[0][0]
     return pairs(hand[0])
 
 
@@ -100,23 +97,24 @@ def straight(value):
 
 
 def pairs(value):
-    if len(set(value)) == 5:
-        return 1, value[4], value[3], value[2], value[1], value[0]
-    v = 0
-    n = 0
+    val = 0
+    num = 0
     comb = []
     for card in value:
         for other in value:
             if card == other:
-                n += 1
-                v = card
-        if n > 1:
-            comb.append((n, v))
-            for i in range(n):
-                value.remove(v)
-        n = 0
+                num += 1
+                val = card
+        if num > 1:
+            comb.append((num, val))
+            value = [i for i in value if i != val]
+        num = 0
 
     comb = list(set(comb))
+    return pairs_comb(comb, value)
+
+
+def pairs_comb(comb, value):
     if len(comb) == 1:
         comb = comb[0]
         if comb[0] == 4:  # Four of a Kind
@@ -136,19 +134,18 @@ def pairs(value):
                    min(comb[0][1], comb[1][1]), value[0]
 
 
-res = 0
+with open('poker.txt') as poker:
+    res = 0
+    for part in poker.readlines():
+        part = part.rstrip().split(' ')
+        first, second = how_cart(part)
+        first = how_comb(first)
+        second = how_comb(second)
 
-for part in cards:
-    first, second = how_cart(cards[part])
-    first = how_comb(first)
-    second = how_comb(second)
-
-    for i in range(len(first)):
-        print(i)
-        if first[i] > second[i]:
-            res += 1
-            break
-        elif first[i] < second[i]:
-            break
-
-print(res)
+        for i in range(len(first)):
+            if first[i] > second[i]:
+                res += 1
+                break
+            elif first[i] < second[i]:
+                break
+    print(res)
