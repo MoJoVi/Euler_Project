@@ -2,7 +2,7 @@
 Найдите сумму всех простых чисел меньше двух миллионов."""
 n = 0
 primes = [3]
-for i in range(5, 200000000, 2):
+for i in range(5, 2000000, 2):
     if primes[n] ** 2 == i:
         n += 1
         continue
@@ -12,4 +12,4 @@ for i in range(5, 200000000, 2):
         elif k == primes[n]:
             primes.append(i)
             break
-print(sum(primes) + 2, len(primes) / len(list(range(2000000))))
+print(sum(primes) + 2)

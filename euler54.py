@@ -97,7 +97,6 @@ def straight(value):
 
 
 def pairs(value):
-    val = 0
     num = 0
     comb = []
     for card in value:
@@ -107,8 +106,8 @@ def pairs(value):
                 val = card
         if num > 1:
             comb.append((num, val))
-            value = [i for i in value if i != val]
-        num = 0
+            value = [elem for elem in value if elem != val]
+            num = 0
 
     comb = list(set(comb))
     return pairs_comb(comb, value)
