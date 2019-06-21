@@ -6,5 +6,5 @@
 не могут начинаться с нуля ни в одном из оснований).
 """
 res = sum([num for num in range(10 ** 6) if str(num) == str(num)[::-1] and \
-       bin(num)[2:] == bin(num)[2:][::-1]])
+           bin(num)[2:] == bin(num)[2:][::-1]])
 print(res)

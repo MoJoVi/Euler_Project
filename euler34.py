@@ -6,19 +6,12 @@
 не являются суммами, учитывать их не следует.
 """
 from functools import reduce
-import time
-start_time = time.time()
-
-res = []
 
 fact_list = {str(num): reduce(lambda x, y: x * y, range(1, num + 1))
              for num in range(1, 10)}
+fact_list['0'] = 1
 
-for num in range(145, 2180000):
-    fact_num = list()
-    for i in str(num):
-        if i != '0':
-            fact_num.append(fact_list[i])
-    if num == sum(fact_num):
-        res.append(num)
-print(sum(res), time.time() - start_time, 'sec')
+res = sum([num for num in range(145, 100000) if
+           num == sum([fact_list[i] for i in str(num)])])
+
+print(res)
