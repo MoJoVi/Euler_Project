@@ -20,7 +20,7 @@ for num in next_pentagon:
         if summ != div\
                 and pentagon_list.get(dif, False)\
                 and pentagon_list.get(summ, False):
-            res = dif
+            res = int(dif)
             break
     if res:
         break

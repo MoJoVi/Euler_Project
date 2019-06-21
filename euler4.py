@@ -5,17 +5,7 @@
 
 Найдите самый большой палиндром, полученный умножением
 двух трехзначных чисел."""
-res = 0
-limit = 999 * 999
-for num in range(limit, 0, -1):
-    if str(num) == str(num)[::-1]:
-        for div in range(999, 100, -1):
-
-            if num / div > 999:
-                break
-            if num % div == 0:
-                res = num
-                break
-    if res:
-        break
-print(res)
+div = range(999, 100, -1)
+pal = (num for num in range(999 * 999, 0, -1) if str(num) == str(num)[::-1])
+res = (num for num in pal for i in div if num / i < 999 and num % i == 0)
+print(next(res))

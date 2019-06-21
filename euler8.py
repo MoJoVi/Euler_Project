@@ -3,19 +3,8 @@
 произведение тринадцати последовательных цифр в данном числе."""
 from functools import reduce
 
-
 with open('euler8.txt'):
     s = open('euler8.txt').read().replace('\n', '')
-
-numlist = []
-answer = 0
-
-for i in s:
-    numlist.append(int(i))
-    if len(numlist) == 13:
-        summ = reduce(lambda x, y: x * y, numlist)
-        if summ > answer:
-            answer = summ
-        numlist.pop(0)
-
-print(answer)
+    nums = [reduce(lambda x, y: int(x) * int(y), s[i:i+13])
+            for i in range(len(s) - 13)]
+print(max(nums))
