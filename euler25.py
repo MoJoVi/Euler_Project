@@ -19,7 +19,6 @@ F12 = 144
 содержащего 1000 цифр?"""
 from euler2 import fib
 
-
 n = 0
 f = fib()
 answer = 0

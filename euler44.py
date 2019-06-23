@@ -8,7 +8,7 @@
 и дайте значение D в качестве ответа."""
 from math import fabs
 
-next_pentagon = map(lambda n: n * (3 * n - 1) // 2, range(1, 1000000))
+next_pentagon = map(lambda n: n * (3 * n - 1) // 2, range(1, 10000))
 
 pentagon_list = {}
 res = 0
