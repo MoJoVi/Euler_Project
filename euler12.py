@@ -14,24 +14,15 @@
 Каково первое треугольное число, у которого более пятисот делителей?"""
 from math import sqrt
 
+res = 0
 
-def divs(num):
+for num in range(1, 10000000):
+    res += num
     count = 0
-    fin = int(sqrt(num))
-    for i in range(1, fin):
-        if num % i == 0:
+    for i in range(1, int(sqrt(res))):
+        if not res % i:
             count += 2
     if count >= 500:
-        return True
-    return False
-
-
-ans = 0
-num = 1
-while True:
-    ans += num
-    if divs(ans):
         break
-    num += 1
 
-print(ans)
+print(res)

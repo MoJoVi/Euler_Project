@@ -5,11 +5,11 @@
 собой n-ую цифру дробной части. Найдите значение следующего выражения:
 d1 × d10 × d100 × d1000 × d10000 × d100000 × d1000000
 """
-res = 1
+
+res, ix = 1, 0
 indexes = [0, 9, 99, 999, 9999, 99999, 999999]
-ix = 0
-for num in (str(k) for k in range(1, 200000)):
-    for i in num:
+for num in range(1, 200000):
+    for i in str(num):
         if ix in indexes:
             res *= int(i)
         ix += 1
