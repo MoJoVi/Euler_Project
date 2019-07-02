@@ -13,34 +13,28 @@
 не может быть записано как сумма двух избыточных чисел, меньше этой границы.
 Найдите сумму всех положительных чисел, которые не могут быть записаны как
 сумма двух избыточных чисел."""
-import time
-from math import sqrt, ceil
+from math import sqrt
 
-start = time.time()
 abund = []
-limit = range(12, 28123)
-for num in limit:
+
+for num in range(12, 28123):
     nums = set()
     nums.add(1)
-    for div in range(2, ceil(sqrt(num)) + 1):
+    for div in range(2, int(sqrt(num)) + 1):
         if num % div == 0:
             nums.add(div)
             nums.add(num // div)
     if sum(nums) > num:
         abund.append(num)
 
-l = set()
+abound_sums = set()
 for i in abund[:len(abund) // 2]:
     for k in abund:
         num = i + k
-        if num in l:
+        if num in abound_sums:
             continue
         elif num > 28123:
             break
-        l.add(num)
-        
-answer = list(range(28124))
-answer = [num for num in answer if num not in l]
+        abound_sums.add(num)
 
-print(sum(answer))
-print("--- %s seconds ---" % (time.time() - start))
+print(sum(num for num in list(range(28124)) if num not in abound_sums))
