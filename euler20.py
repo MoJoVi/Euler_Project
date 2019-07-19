@@ -4,6 +4,5 @@
 Найдите сумму цифр в числе 100!."""
 from functools import reduce
 
-ans = str(reduce(lambda x, y: x * y, list(range(1, 101))))
-ans = reduce(lambda x, y: int(x) + int(y), ans)
-print(ans)
+num = str(reduce(lambda x, y: x * y, list(range(1, 101))))
+print(reduce(lambda x, y: int(x) + int(y), num))
