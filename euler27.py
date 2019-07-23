@@ -18,29 +18,30 @@ n^2+an+b, где |a|<1000 и |b|≤1000
 согласно которому можно получить максимальное количество простых чисел
 для последовательных значений n, начиная со значения n=0.
 """
-from math import sqrt, ceil, fabs
+from math import sqrt, ceil
 
 
 def is_prime(num):
     if num is 1:
         return False
-    for div in range(2, ceil(sqrt(fabs(num)))):
+    for div in range(2, int(sqrt(abs(num))) + 1):
         if not num % div:
             return False
     return True
 
 
-res, long = 0, 0
-for a in range(-999, 1000):
-    for b in range(-999, 1000):
-        long_num = 0
-        for num in range(0, 1000):
-            if not is_prime(num ** 2 + a * num + b):
-                break
-            else:
-                long_num += 1
-        if long_num > long:
-            long = long_num
-            res = a * b
+if __name__ == '__main__':
+    res, long = 0, 0
+    for a in range(-999, 1000):
+        for b in range(-999, 1000):
+            long_num = 0
+            for num in range(0, 1000):
+                if not is_prime(num ** 2 + a * num + b):
+                    break
+                else:
+                    long_num += 1
+            if long_num > long:
+                long = long_num
+                res = a * b
 
-print(res, long)
+    print(res)

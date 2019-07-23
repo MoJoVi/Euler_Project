@@ -9,5 +9,5 @@
 """
 from itertools import permutations as p
 
-print(next((num for ix, num in enumerate(''.join(i) for i in p('0123456789'))
-            if ix == 999999)))
+print(next(num for ix, num in enumerate(''.join(i) for i in p('0123456789'))
+           if ix == 999999))

@@ -11,6 +11,7 @@
 ПРИМЕЧАНИЕ: числа 2, 3, 5 и 7 таковыми не считаются.
 """
 from math import sqrt
+import time
 
 
 def is_prime(num):
@@ -30,9 +31,6 @@ def tran(num):
     return True
 
 
-res_gen = (num for num in range(11, 1000000, 2) if tran(num))
-res = 0
-for i in range(11):
-    res += next(res_gen)
-
-print(res)
+start = time.time()
+res = (num for num in range(11, 1000000, 2) if tran(num))
+print(sum(next(res) for i in range(11)))
