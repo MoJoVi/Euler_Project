@@ -9,11 +9,9 @@
 и шестиугольным.
 """
 pent, hexag = {}, {}
-for num in range(1, 1000000000):
+for num in range(286, 100000):
     triangle = num * (num + 1) // 2
-    if pent.get(triangle, False)\
-            and hexag.get(triangle, False)\
-            and triangle != 40755:
+    if pent.get(triangle, False) and hexag.get(triangle, False):
         print(triangle)
         break
     pent[num * (3 * num - 1) / 2] = True

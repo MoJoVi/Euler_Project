@@ -35,26 +35,18 @@ K - король, A - туз; S - пики, C - трефы, H - червы, D - 
 
 
 def how_cart(cardlist):
+    sorting = {
+        'T': 10,
+        'J': 11,
+        'Q': 12,
+        'K': 13,
+        'A': 14
+    }
     for ix, card in enumerate(cardlist):
         card = [card[0], card[1]]
-
-        if card[0] == 'T':
-            card[0] = 10
-        elif card[0] == 'J':
-            card[0] = 11
-        elif card[0] == 'Q':
-            card[0] = 12
-        elif card[0] == 'K':
-            card[0] = 13
-        elif card[0] == 'A':
-            card[0] = 14
-        else:
-            card[0] = int(card[0])
+        card[0] = sorting[card[0]] if not card[0].isdigit() else int(card[0])
         cardlist[ix] = card
-    first_player, second_player = cardlist[:5], cardlist[5:]
-    first_player = sort_cards(first_player)
-    second_player = sort_cards(second_player)
-
+    first_player, second_player = sort_cards(cardlist[:5]), sort_cards(cardlist[5:])
     return first_player, second_player
 
 
@@ -64,87 +56,63 @@ def sort_cards(hand):
     for card in hand:
         suit.add(card.pop(-1))
         value.append(*card)
-
-    value.sort()
+    value = sorted(value, reverse=True)
     return value, suit
 
 
 def how_comb(hand):
-    if len(hand[1]) == 1 \
-            and straight(hand[0]) \
-            and hand[0][-1] == 14:  # Royal Flush
-        return 10
-    elif len(hand[1]) == 1 and straight(hand[0]):  # Straight Flush
-        return 9, hand[0][-1]
-    elif len(hand[1]) == 1:  # Flush
-        return 6, hand[0][4], hand[0][3], \
-               hand[0][2], hand[0][1], hand[0][0]
-    elif straight(hand[0]):  # Straight
-        return 5, hand[0][-1]
+    if flush(hand[1]):
+        if straight(hand[0]):
+            if hand[0][0] == 14:
+                res = 10
+            res = 9
+        res = 6
+    elif straight(hand[0]):
+        res = 5
     elif len(set(hand[0])) == 5:
-        return 1, hand[0][4], hand[0][3], hand[0][2], hand[0][1], hand[0][0]
-    return pairs(hand[0])
+        res = 1
+    else:
+        return pairs(hand[0])
+    return res, hand[0]
+
+
+def flush(suit):
+    return True if len(suit) is 1 else False
 
 
 def straight(value):
-    if value[4] - value[3] == 1 \
-            and value[3] - value[2] == 1 \
-            and value[2] - value[1] == 1 \
-            and value[1] - value[0] == 1:
-        return True
+    for ix, num in enumerate(range(value[0], value[0] - 5, -1)):
+        if value[ix] != num:
+            return False
     else:
-        return False
+        return True
 
 
 def pairs(value):
-    num = 0
-    comb = []
-    for card in value:
-        for other in value:
-            if card == other:
-                num += 1
-                val = card
-        if num > 1:
-            comb.append((num, val))
-            value = [elem for elem in value if elem != val]
-            num = 0
-
-    comb = list(set(comb))
-    return pairs_comb(comb, value)
+    comb = {(value.count(card), card) for card in value if value.count(card) > 1}
+    comb = sorted(list(comb), reverse=True)
+    res = {  # other combinations
+        (1, 4): 8,
+        (1, 3): 4,
+        (1, 2): 2,
+        (2, 3): 7,
+        (2, 2): 3
+    }
+    return res[(len(comb), comb[0][0])], comb[0][1]
 
 
-def pairs_comb(comb, value):
-    if len(comb) == 1:
-        comb = comb[0]
-        if comb[0] == 4:  # Four of a Kind
-            return 8, comb[1], value[0]
-        elif comb[0] == 3:  # Three of a Kind
-            return 4, comb[1], value[1], value[0]
-        elif comb[0] == 2:  # One Pair
-            return 2, comb[1], value[2], value[1], value[0]
+if __name__ == '__main__':
+    with open('poker.txt') as poker:
+        res = 0
+        for part in poker.readlines():
+            part = part.rstrip().split(' ')
+            first, second = how_cart(part)
+            first, second = how_comb(first), how_comb(second)
 
-    else:
-        if comb[0][0] == 3:  # Full House
-            return 7, comb[0][1], comb[1][1]
-        elif comb[1][0] == 3:
-            return 7, comb[1][1], comb[0][1]
-        else:  # Two Pairs
-            return 3, max(comb[0][1], comb[1][1]), \
-                   min(comb[0][1], comb[1][1]), value[0]
-
-
-with open('poker.txt') as poker:
-    res = 0
-    for part in poker.readlines():
-        part = part.rstrip().split(' ')
-        first, second = how_cart(part)
-        first = how_comb(first)
-        second = how_comb(second)
-
-        for i in range(len(first)):
-            if first[i] > second[i]:
-                res += 1
-                break
-            elif first[i] < second[i]:
-                break
-    print(res)
+            for i in range(len(first)):
+                if first[i] > second[i]:
+                    res += 1
+                    break
+                elif first[i] < second[i]:
+                    break
+        print(res)

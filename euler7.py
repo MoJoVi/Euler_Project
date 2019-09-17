@@ -3,13 +3,20 @@
 
 Какое число является 10001-ым простым числом?"""
 from math import sqrt
-n = 1  # Prime number counter
-i = 1
-while n < 10001:
-    i += 2
-    for k in range(3, int(sqrt(i)) + 1):
-        if i % k == 0:
-            break
+
+
+def is_prime(num):
+    for div in range(3, int(sqrt(num)) + 1):
+        if num % div == 0:
+            return False
     else:
-        n += 1
-print(i)
+        return True
+
+
+if __name__ == '__main__':
+    count = 1
+    primes = iter((num for num in range(3, 200000, 2) if is_prime(num)))
+    while count < 10001:
+        count += 1
+        res = next(primes)
+    print(res)

@@ -1,6 +1,5 @@
 """Сумма простых чисел меньше 10 равна 2 + 3 + 5 + 7 = 17.
 Найдите сумму всех простых чисел меньше двух миллионов."""
-
 ix, primes = 1, [2, 3]
 for num in range(5, 2000000, 2):
     if primes[ix] ** 2 == num:
@@ -12,4 +11,4 @@ for num in range(5, 2000000, 2):
     else:
         primes.append(num)
 
-print(sum(primes), len(primes))
+print(sum(primes))
