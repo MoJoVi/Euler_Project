@@ -8,19 +8,14 @@
 Какова сумма очков имен в файле?"""
 from string import ascii_uppercase as alph
 
-numsdict = {letter: alph.index(letter) + 1 for letter in alph}
-
-with open('names.txt') as names:
-    for namelist in names:
-        namelist = sorted(namelist.replace('"', '').split(','))
-
+numsdict = dict(zip(alph, range(1, 27)))
 res = 0
 
-for name in namelist:
-    name_res = 0
-    for letter in name:
-        name_res += numsdict[letter]
-    name_res *= (namelist.index(name) + 1)
-    res += name_res
+with open('names.txt') as names:
+    namelist = sorted(names.read().replace('"', '').split(','))
+
+for ix, name in enumerate(namelist):
+    res += sum(numsdict[letter] for letter in name) * (ix + 1)
 
 print(res)
+# 871198282

@@ -13,7 +13,7 @@ next_pentagon = map(lambda n: n * (3 * n - 1) // 2, range(1, 10000))
 pentagon_list = {}
 res = 0
 for num in next_pentagon:
-    pentagon_list[num] = 1
+    pentagon_list[num] = True
     for div in pentagon_list.keys():
         summ = num - div
         dif = abs(summ - div)

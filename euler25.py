@@ -19,12 +19,11 @@ F12 = 144
 содержащего 1000 цифр?"""
 from euler2 import fib
 
-n = 0
 f = fib()
-answer = 0
+answer = count = 0
 
 while len(str(answer)) < 1000:
     answer = next(f)
-    n += 1
+    count += 1
     
-print(n)
+print(count)

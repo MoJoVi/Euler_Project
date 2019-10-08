@@ -12,11 +12,20 @@
 Какова сумма чисел в диагоналях спирали 1001 на 1001,
 образованной таким же способом?
 """
+num, step = 1, 0
+# res = 1
+#
+# for _ in range(2000):
+#     step += 2
+#     for _ in range(4):
+#         num += step
+#         res += num
+# print(res)
+# 42706684001
 res = set()
-num = 1
-step = 0
+res.add(num)
+
 while len(res) < 2001:
-    res.add(num)
     step += 2
     for reply in range(4):
         num += step

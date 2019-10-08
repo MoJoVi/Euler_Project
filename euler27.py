@@ -18,30 +18,31 @@ n^2+an+b, где |a|<1000 и |b|≤1000
 согласно которому можно получить максимальное количество простых чисел
 для последовательных значений n, начиная со значения n=0.
 """
-from math import sqrt, ceil
+from math import ceil
+import time
 
 
 def is_prime(num):
-    if num is 1:
-        return False
-    for div in range(2, int(sqrt(abs(num))) + 1):
+    num = abs(num)
+    for div in range(2, ceil(num ** 0.5)):
         if not num % div:
             return False
     return True
 
 
 if __name__ == '__main__':
-    res, long = 0, 0
+    limit = 80 ** 2 + 1000 * 80 + 1000 + 1
+    primes = {num: True for num in range(3, limit, 2) if is_prime(num)}
+    long = [0, 0]  # 0 - длина максимальной последовательности, 1 - произведение коэфициентов
     for a in range(-999, 1000):
-        for b in range(-999, 1000):
-            long_num = 0
-            for num in range(0, 1000):
-                if not is_prime(num ** 2 + a * num + b):
-                    break
+        for b in range(-1000, 1000):
+            long_num = [0, a * b]
+            for num in range(0, 100):
+                if primes.get(abs(num ** 2 + a * num + b), False):
+                    long_num[0] += 1
                 else:
-                    long_num += 1
-            if long_num > long:
-                long = long_num
-                res = a * b
+                    break
+            long = max(long_num, long)  # питон сравнивает числовые
+            # последовательности по первому числу
 
-    print(res)
+    print(long[1])

@@ -10,10 +10,9 @@
 Сколько воскресений выпадает на первое число месяца в двадцатом веке
 (с 1 января 1901 года до 31 декабря 2000 года)?
 """
-import calendar
+from calendar import monthrange
+
 res = 0
 for year in range(1901, 2001):
-    for month in range(1, 13):
-        if calendar.monthrange(year, month)[0] is 6:
-            res += 1
+    res += len([x for x in range(12) if monthrange(year, x + 1)[0] is 6])
 print(res)

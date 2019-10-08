@@ -34,7 +34,7 @@
 K - король, A - туз; S - пики, C - трефы, H - червы, D - бубны."""
 
 
-def how_cart(cardlist):
+def how_cards(cardlist):
     sorting = {
         'T': 10,
         'J': 11,
@@ -43,7 +43,7 @@ def how_cart(cardlist):
         'A': 14
     }
     for ix, card in enumerate(cardlist):
-        card = [card[0], card[1]]
+        card = list(card)
         card[0] = sorting[card[0]] if not card[0].isdigit() else int(card[0])
         cardlist[ix] = card
     first_player, second_player = sort_cards(cardlist[:5]), sort_cards(cardlist[5:])
@@ -51,12 +51,11 @@ def how_cart(cardlist):
 
 
 def sort_cards(hand):
-    value = []
-    suit = set()
+    value, suit = list(), set()
     for card in hand:
-        suit.add(card.pop(-1))
-        value.append(*card)
-    value = sorted(value, reverse=True)
+        suit.add(card.pop())
+        value.append(card.pop())
+    value.sort(reverse=True)
     return value, suit
 
 
@@ -77,7 +76,7 @@ def how_comb(hand):
 
 
 def flush(suit):
-    return True if len(suit) is 1 else False
+    return len(suit) == 1
 
 
 def straight(value):
@@ -106,13 +105,12 @@ if __name__ == '__main__':
         res = 0
         for part in poker.readlines():
             part = part.rstrip().split(' ')
-            first, second = how_cart(part)
+            first, second = how_cards(part)
             first, second = how_comb(first), how_comb(second)
-
-            for i in range(len(first)):
-                if first[i] > second[i]:
+            for fir, sec in zip(first, second):
+                if fir > sec:
                     res += 1
                     break
-                elif first[i] < second[i]:
+                elif fir < sec:
                     break
         print(res)

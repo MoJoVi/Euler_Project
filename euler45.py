@@ -8,11 +8,11 @@
 Найдите следующее треугольное число, являющееся также пятиугольным
 и шестиугольным.
 """
-pent, hexag = {}, {}
-for num in range(286, 100000):
+pent_nums, hexag_nums = {}, {}
+for num in range(144, 100000):
     triangle = num * (num + 1) // 2
-    if pent.get(triangle, False) and hexag.get(triangle, False):
-        print(triangle)
+    if pent_nums.get(triangle, False) and hexag_nums.get(triangle, False):
+        print(num, triangle)
         break
-    pent[num * (3 * num - 1) / 2] = True
-    hexag[num * (2 * num - 1)] = True
+    pent_nums[num * (3 * num - 1) / 2] = True
+    hexag_nums[num * (2 * num - 1)] = True
