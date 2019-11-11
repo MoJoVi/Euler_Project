@@ -12,16 +12,16 @@
 coins = (1, 2, 5, 10, 20, 50, 100, 200)
 
 
-def sum_combs(sum_coins, combs, coins):
+def sum_combs(sum_coins, coins, combs=0):
     if sum_coins == 200:
         return 1
     elif sum_coins > 200:
         return 0
     else:
         for i in range(len(coins)):
-            combs += sum_combs(sum_coins + coins[i], 0, coins[i:])
+            combs += sum_combs(sum_coins + coins[i], coins[i:])
     return combs
 
 
 if __name__ == '__main__':
-    print(sum_combs(0, 0, coins))
+    print(sum_combs(0, coins))
