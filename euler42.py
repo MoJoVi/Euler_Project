@@ -15,13 +15,7 @@ n-ый член последовательности треугольных чи
 """
 from string import ascii_uppercase as letters
 
-let_cost = {let: n for let, n in zip(letters, range(1, 27))}
-triangles = {int(0.5 * n * (n + 1)) for n in range(1, 20)}
-res = 0
-
 with open('p042_words.txt') as file:
-    for word in eval(file.read()):
-        sum_let = sum(let_cost[let] for let in word)
-        res += 1 if sum_let in triangles else 0
-        
-print(res)
+    let_cost = {let: n for let, n in zip(letters, range(1, 27))}
+    triangles = {int(0.5 * n * (n + 1)) for n in range(1, 20)}
+    print(len([word for word in eval(file.read()) if sum(let_cost[let] for let in word) in triangles]))
