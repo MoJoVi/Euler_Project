@@ -9,7 +9,6 @@
 Сколькими разными способами можно составить £2, используя любое
 количество монет?
 """
-coins = (1, 2, 5, 10, 20, 50, 100, 200)
 
 
 def sum_combs(sum_coins, coins, combs=0):
@@ -24,4 +23,4 @@ def sum_combs(sum_coins, coins, combs=0):
 
 
 if __name__ == '__main__':
-    print(sum_combs(0, coins))
+    print(sum_combs(0, (1, 2, 5, 10, 20, 50, 100, 200)))

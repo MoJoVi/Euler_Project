@@ -7,8 +7,8 @@ d1 × d10 × d100 × d1000 × d10000 × d100000 × d1000000
 """
 
 res, ix = 1, 0
-indexes = [0, 9, 99, 999, 9999, 99999, 999999]
-for num in range(1, 200000):
+indexes = [1, 10, 100, 1000, 10000, 100000, 1000000]
+for num in range(200000):
     for i in str(num):
         if ix in indexes:
             res *= int(i)
