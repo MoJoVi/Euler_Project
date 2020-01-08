@@ -44,7 +44,7 @@ def how_cards(cardlist):
     }
     for ix, card in enumerate(cardlist):
         card = list(card)
-        card[0] = sorting[card[0]] if not card[0].isdigit() else int(card[0])
+        card[0] = sorting[card[0]] if card[0].isalpha() else int(card[0])
         cardlist[ix] = card
     first_player, second_player = sort_cards(cardlist[:5]), sort_cards(cardlist[5:])
     return first_player, second_player
@@ -60,31 +60,25 @@ def sort_cards(hand):
 
 
 def how_comb(hand):
-    if flush(hand[1]):
+    if len(hand[1]) == 1:
         if straight(hand[0]):
             if hand[0][0] == 14:
-                res = 10
-            res = 9
-        res = 6
+                res = 10, hand[0]
+            else:
+                res = 9, hand[0]
+        else:
+            res = 6, hand[0]
     elif straight(hand[0]):
-        res = 5
+        res = 5, hand[0]
     elif len(set(hand[0])) == 5:
-        res = 1
+        res = 1, hand[0]
     else:
-        return pairs(hand[0])
-    return res, hand[0]
-
-
-def flush(suit):
-    return len(suit) == 1
+        res = pairs(hand[0])
+    return res
 
 
 def straight(value):
-    for ix, num in enumerate(range(value[0], value[0] - 5, -1)):
-        if value[ix] != num:
-            return False
-    else:
-        return True
+    return len(set(x - ix for ix, x in enumerate(value[::-1]))) == 1
 
 
 def pairs(value):
@@ -92,10 +86,10 @@ def pairs(value):
     comb = sorted(list(comb), reverse=True)
     res = {  # other combinations
         (1, 4): 8,
-        (1, 3): 4,
-        (1, 2): 2,
         (2, 3): 7,
-        (2, 2): 3
+        (1, 3): 4,
+        (2, 2): 3,
+        (1, 2): 2
     }
     return res[(len(comb), comb[0][0])], comb[0][1]
 

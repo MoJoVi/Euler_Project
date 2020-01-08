@@ -15,7 +15,6 @@ import time
 from math import sqrt
 res = 0
 start = time.time()
-
 for num in range(2, 1000001):
     n = num
     for div in (div for div in range(2, int(sqrt(num) + 1)) if not n % div):
