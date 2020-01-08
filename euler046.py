@@ -14,7 +14,7 @@
 Каково наименьшее нечетное составное число, которое нельзя записать в
 виде суммы простого числа и удвоенного квадрата?
 """
-from euler7 import is_prime
+from euler007 import is_prime
 
 
 def checker(num):

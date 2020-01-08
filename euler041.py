@@ -6,7 +6,7 @@ n используется в нем ровно один раз. К пример
 Какое существует наибольшее n-значное пан-цифровое простое число?
 """
 from itertools import permutations
-from euler7 import is_prime
+from euler007 import is_prime
 
 res = 0
 for i in range(9):
