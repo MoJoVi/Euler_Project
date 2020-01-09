@@ -4,12 +4,16 @@
 
 Найдите самый большой палиндром, полученный умножением двух трехзначных чисел.
 """
-res = set()
+res = 0
 
-for n1 in range(999, 100, -1):
-    for n2 in range(999, 900, -1):
-        num = n1 * n2
-        if str(num) == str(num)[::-1]:
-            res.add(num)
+for num in (n for n in range(999 * 999, 900000, -1) if str(n) == str(n)[::-1]):
+    for n1 in (n for n in range(999, 100, -1) if not num % n):
+        n2 = num // n1
+        if n2 // 1000 == 0:
+            res = num
+        else:
+            break
+    if res:
+        break
 
-print(max(res))
+print(res)
