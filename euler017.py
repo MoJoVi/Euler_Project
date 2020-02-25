@@ -9,25 +9,25 @@
 состоит из 23 букв, число 115 (one hundred and fifteen) - из 20 букв. Использование "and"
 при записи чисел соответствует правилам британского английского.
 """
-SIMPLE = {
+unit = {
     1 : 3, 2 : 3, 3 : 5, 4 : 4,
     5 : 4, 6 : 3, 7 : 5, 8 : 5,
     9 : 4, 10: 3, 11: 6, 12: 6,
     13: 8, 14: 8, 15: 7, 16: 7,
     17: 9, 18: 8, 19: 8
 }
-DOZENS = {
+tens = {
     2: 5, 3: 6, 4: 5, 5: 5,
     6: 5, 7: 8, 8: 6, 9: 6
 }
 res = 11  # one thousand
 
 for num in range(1, 1000):
-    h = SIMPLE.get(num // 100, 0)
+    h = unit.get(num // 100, 0)
     if h:
         h += 10 if num % 100 else 7
-    d = DOZENS.get((num % 100) // 10, 0)
-    s = SIMPLE.get(num % 100, 0) if not d else SIMPLE.get(num % 10, 0)
+    d = tens.get((num % 100) // 10, 0)
+    s = unit.get(num % 100, 0) if not d else unit.get(num % 10, 0)
     res += h + d + s
 
 print(res)
