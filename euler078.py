@@ -16,8 +16,6 @@ O O O O O
 import time
 from math import ceil
 
-start = time.time()
-
 
 def gen_next_p():
     p_nums, num = dict(), 0
@@ -39,6 +37,7 @@ def gen_next_p():
 
 
 if __name__ == '__main__':
+    start = time.time()
     next_p = iter(gen_next_p())
     num, p = next(next_p)
     while p % 1000000:

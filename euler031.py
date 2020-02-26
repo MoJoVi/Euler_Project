@@ -11,16 +11,17 @@
 """
 
 
-def sum_combs(sum_coins, coins, combs=0):
-    if sum_coins == 200:
+def sum_combs(coins: list, sum_coins=0, combs=0, limit=200):
+    if sum_coins == limit:
         return 1
-    elif sum_coins > 200:
+    elif sum_coins > limit:
         return 0
     else:
         for i in range(len(coins)):
-            combs += sum_combs(sum_coins + coins[i], coins[i:])
+            combs += sum_combs(coins[i:], sum_coins + coins[i])
     return combs
 
 
 if __name__ == '__main__':
-    print(sum_combs(0, (1, 2, 5, 10, 20, 50, 100, 200)))
+    coins = [1, 2, 5, 10, 20, 50, 100, 200]
+    print(sum_combs(coins))
