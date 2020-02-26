@@ -24,8 +24,8 @@ import time
 
 def is_prime(num):
     num = abs(num)
-    for div in range(2, ceil(num ** 0.5)):
-        if not num % div:
+    for div in range(2, ceil(num ** 0.5)+1):
+        if not num % div and num != div:
             return False
     return True
 
