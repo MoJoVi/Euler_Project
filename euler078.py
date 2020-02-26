@@ -13,12 +13,14 @@ O O O O O
 
 Найдите наименьшее значение n для которого p(n) делится на один миллион без остатка.
 """
+import time
 from math import ceil
+
+start = time.time()
 
 
 def gen_next_p():
-    p_nums = dict()
-    num = 0
+    p_nums, num = dict(), 0
     while True:
         res = p_nums.get(num - 1, 0) + p_nums.get(num - 2, 0)
         res += 1 if not res else 0
@@ -38,7 +40,8 @@ def gen_next_p():
 
 if __name__ == '__main__':
     next_p = iter(gen_next_p())
-    for num, p in next_p:
-        if not p % 1000000:
-            print('num:', num)
-            break
+    num, p = next(next_p)
+    while p % 1000000:
+        num, p = next(next_p)
+    print('num:', num)
+    print(f'time: {time.time() - start} sec.')
