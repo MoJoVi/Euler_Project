@@ -13,15 +13,6 @@
 образованной таким же способом?
 """
 num, step = 1, 0
-# res = 1
-#
-# for _ in range(2000):
-#     step += 2
-#     for _ in range(4):
-#         num += step
-#         res += num
-# print(res)
-# 42706684001
 res = set()
 res.add(num)
 
