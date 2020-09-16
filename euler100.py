@@ -16,23 +16,26 @@ P(BB) = (15/21)×(14/20) = 1/2.
 from decimal import Decimal as dec
 from math import ceil, floor
 
+res = None
 key, x = 6, 15
 step = x / 2
-while True:
+while res is None:
     y = x + key
     x_side, y_side = dec(x * (x - 1) * 2), dec(y * (y - 1))
 
     if x_side == y_side:
         if y > 10 ** 12:
-            print(x, y)
-            break
-        key = dec(x * (x - 1) / key)
-        step = ceil(x / 2)
-        continue
+            res = x, int(y)
+        else:
+            key = dec(x * (x - 1) / key)
+            step = ceil(x / 2)
 
     elif x_side > y_side and step > 0:
         step = ceil(step / 2) * -1
 
     elif x_side < y_side and step < 0:
         step = floor(step / 2) * -1
+
     x += step
+
+print(res)

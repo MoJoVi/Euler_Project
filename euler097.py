@@ -10,7 +10,8 @@
 Найдите последние десять цифр этого простого числа.
 """
 res = 2
+div = 10 ** 10
 for i in range(7830456):
-    res = int(str(res * 2)[-10:])
+    res = res * 2 % div
 
-print(str(28433 * res + 1)[-10:])
+print(28433 * res % div + 1)
